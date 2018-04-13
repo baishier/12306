@@ -3,6 +3,7 @@ package org.website.page;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import org.jsoup.nodes.Element;
@@ -11,14 +12,16 @@ import org.website.vo.Page;
 
 public class PageParserTool {
 
-	/* 通过选择器来选取页面的 */
+	private PageParserTool() {
+	}
+
+	/** 通过选择器来选取页面的 */
 	public static Elements select(Page page, String cssSelector) {
 		return page.getDoc().select(cssSelector);
 	}
 
-	/*
+	/**
 	 * 通过css选择器来得到指定元素;
-	 *
 	 */
 	public static Element select(Page page, String cssSelector, int index) {
 		Elements eles = select(page, cssSelector);
@@ -37,11 +40,11 @@ public class PageParserTool {
 	 * @return
 	 */
 	public static Set<String> getLinks(Page page, String cssSelector) {
-		Set<String> links = new HashSet<String>();
+		Set<String> links = new HashSet<>();
 		Elements es = select(page, cssSelector);
 		Iterator<Element> iterator = es.iterator();
 		while (iterator.hasNext()) {
-			Element element = (Element) iterator.next();
+			Element element = iterator.next();
 			if (element.hasAttr("href")) {
 				links.add(element.attr("abs:href"));
 			} else if (element.hasAttr("src")) {
@@ -58,8 +61,8 @@ public class PageParserTool {
 	 * @param attrName
 	 * @return
 	 */
-	public static ArrayList<String> getAttrs(Page page, String cssSelector, String attrName) {
-		ArrayList<String> result = new ArrayList<String>();
+	public static List<String> getAttrs(Page page, String cssSelector, String attrName) {
+		ArrayList<String> result = new ArrayList<>();
 		Elements eles = select(page, cssSelector);
 		for (Element ele : eles) {
 			if (ele.hasAttr(attrName)) {

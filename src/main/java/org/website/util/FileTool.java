@@ -7,7 +7,7 @@ import java.io.IOException;
 
 import org.website.vo.Page;
 
-/*  本类主要是 下载那些已经访问过的文件*/
+/** 本类主要是 下载那些已经访问过的文件 */
 public class FileTool {
 
 	private static String dirPath;
@@ -26,11 +26,11 @@ public class FileTool {
 		}
 		// 如 application/pdf 类型
 		else {
-			return url.replaceAll("[\\?/:*|<>\"]", "_") + "." + contentType.substring(contentType.lastIndexOf("/") + 1);
+			return url.replaceAll("[\\?/:*|<>\"]", "_") + "." + contentType.substring(contentType.lastIndexOf('/') + 1);
 		}
 	}
 
-	/*
+	/**
 	 * 生成目录
 	 */
 	private static void mkdir() {
@@ -53,8 +53,8 @@ public class FileTool {
 		String filePath = dirPath + fileName;
 		byte[] data = page.getContent();
 		try {
-			// Files.lines(Paths.get("D:\\jd.txt"),
-			// StandardCharsets.UTF_8).forEach(System.out::println);
+			/** Files.lines(Paths.get("D:\\jd.txt"), */
+			/** StandardCharsets.UTF_8).forEach(System.out::println); */
 			DataOutputStream out = new DataOutputStream(new FileOutputStream(new File(filePath)));
 			for (int i = 0; i < data.length; i++) {
 				out.write(data[i]);

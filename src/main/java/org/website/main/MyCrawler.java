@@ -3,7 +3,6 @@ package org.website.main;
 import java.util.Set;
 
 import org.jsoup.select.Elements;
-import org.website.link.LinkFilter;
 import org.website.link.Links;
 import org.website.page.PageParserTool;
 import org.website.page.RequestAndResponseTool;
@@ -37,14 +36,10 @@ public class MyCrawler {
 		initCrawlerWithSeeds(seeds);
 
 		// 定义过滤器，提取以 http://www.baidu.com 开头的链接
-		LinkFilter filter = new LinkFilter() {
-			public boolean accept(String url) {
-				if (url.startsWith("http://www.baidu.com"))
-					return true;
-				else
-					return false;
-			}
-		};
+		/**
+		 * LinkFilter filter = new LinkFilter() { public boolean accept(String url) { if
+		 * (url.startsWith("http://www.baidu.com")) return true; else return false; } };
+		 */
 
 		// 循环条件：待抓取的链接不空且抓取的网页不多于 1000
 		while (!Links.unVisitedUrlQueueIsEmpty() && Links.getVisitedUrlNum() <= 1000) {
@@ -55,7 +50,7 @@ public class MyCrawler {
 				continue;
 			}
 
-			// 根据URL得到page;
+			// 根据URL得到page
 			Page page = RequestAndResponseTool.sendRequstAndGetResponse(visitUrl);
 
 			// 对page进行处理： 访问DOM的某个标签
